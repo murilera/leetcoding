@@ -25,5 +25,28 @@ const productExceptSelf = (nums) => {
   return solution;
 };
 
+//time = O(n)
+//space = O(n)
+
+const productExceptSelfBetter = (nums) => {
+  const solution = new Array(nums.length);
+
+  solution[0] = 1;
+  for (let i = 1; i < nums.length; i++) {
+    solution[i] = solution[i - 1] * nums[i - 1];
+  }
+
+  let right = 1;
+  for (let i = nums.length - 1; i >= 0; i--) {
+    solution[i] *= right;
+    right *= nums[i];
+  }
+
+  return solution;
+};
+
+//time = O(n)
+//space = O(1)
+
 const input = [1, 2, 3, 4];
 console.log(productExceptSelf(input));
